@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Users App</title>
+  </head>
+  <body>
+    <h3>User</h3>
+    <p id="user"></p>
+    <label for="id">identifiant</label><input type="text" id="id">
+    <button type="button" onclick='getValue();'>Chercher</button>
+    <h5>
+      <p id="fn"></p>
+    </h5> 
+    <h5>
+    <p id="ln"></p> 
+    </h5>
+    <h5>
+      <p id="email"></p>
+    </h5> id="email"> 
+    <script>
+
+  
+      function getValue() 
+              {
+                document.getElementById("ln").innerHTML=``;
+                document.getElementById("fn").innerHTML=``;
+                document.getElementById("email").innerHTML=``;
+                var input = document.getElementById("id").value;
+                //alert(input);
+      
+                const apiUrl = `https://reqres.in/api/users?id=${input}`;
+                fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                const email = data.data.email;
+                const fn = data.data.first_name;
+                const ln = data.data.last_name;
+                document.getElementById("ln").innerHTML = `le nom de l'utilisateur : ${ln}`;
+                document.getElementById("fn").innerHTML = `le prenom de l'utilisateur:  ${fn}`;
+                document.getElementById("email").innerHTML = `l email de l'utilisateur :  ${email}`;
+                });
+            }   
+      </script>
+  </body>
+</html>
